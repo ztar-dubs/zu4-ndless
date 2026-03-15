@@ -1,0 +1,13 @@
+# Build artifacts
+*.o
+*.elf
+*.tns
+*.zehn
+*.map
+
+# Keep prod/data/*.tns (game data archives)
+!prod/data/*.tns
+# Keep prod/conf/*.tns
+!prod/conf/**/*.tns
+# Keep prod/graphics/*.tns
+!prod/graphics/**/*.tns

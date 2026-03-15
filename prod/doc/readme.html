@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ultima IV - TI-Nspire CX CAS Port</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 15px; line-height: 1.6; color: #333; }
+h1 { color: #1a1a6c; border-bottom: 2px solid #1a1a6c; padding-bottom: 8px; }
+h2 { color: #2a2a8c; margin-top: 30px; }
+table { border-collapse: collapse; margin: 10px 0; }
+th, td { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
+th { background: #eef; }
+code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+.tree { font-family: monospace; white-space: pre; background: #f8f8f8; padding: 12px; border-radius: 5px; line-height: 1.4; }
+a { color: #1a1a8c; }
+.note { background: #fff8e0; border-left: 4px solid #e0c040; padding: 8px 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>Ultima IV - TI-Nspire CX CAS Port</h1>
+
+<p>A port of <strong>Ultima IV: Quest of the Avatar</strong> to the TI-Nspire CX CAS calculator,
+based on the <a href="https://github.com/0ldsk00l/zu4">zu4 (Zesty Ultima IV)</a> open source engine.</p>
+
+<h2>Requirements</h2>
+<ul>
+    <li>TI-Nspire CX or CX CAS (color screen required)</li>
+    <li><a href="https://ndless.me/">Ndless</a> jailbreak installed on the calculator</li>
+    <li>Ultima IV PC game data (included as <code>ultima4.zip.tns</code>)</li>
+    <li>VGA upgrade graphics (included as <code>u4upgrad.zip.tns</code>)</li>
+</ul>
+
+<h2>Installation</h2>
+
+<p>Copy the entire <code>ultima4</code> folder to your calculator's <code>/documents/</code> directory,
+preserving the directory structure below:</p>
+
+<div class="tree">documents/
+  ultima4/
+    ultima4.tns              &lt;-- main executable
+    conf/                    &lt;-- configuration files (XML)
+      config.xml.tns
+      creatures.xml.tns
+      graphics.xml.tns
+      maps.xml.tns
+      tileRules.xml.tns
+      tileset-base.xml.tns
+      tileset-dungeon.xml.tns
+      tilesets.xml.tns
+      tilemap-base.xml.tns
+      tilemap-dungeon.xml.tns
+      vendorScript.xml.tns
+      music.xml.tns
+      sound.xml.tns
+      dtd/                   &lt;-- DTD files
+        *.dtd.tns
+    data/                    &lt;-- game data archives
+      ultima4.zip.tns
+      u4upgrad.zip.tns
+    graphics/                &lt;-- tile graphics (PNG)
+      ega/
+        *.png.tns
+      vga/
+        *.png.tns
+      u4.png.tns</div>
+
+<div class="note">
+<strong>Important:</strong> All files must have the <code>.tns</code> extension.
+The directory structure must be preserved exactly as shown.
+</div>
+
+<p>To launch, open <code>ultima4.tns</code> from the calculator's file browser.</p>
+
+<h2>Controls</h2>
+
+<h3>Navigation</h3>
+<table>
+    <tr><th>Key</th><th>Action</th></tr>
+    <tr><td>Arrow keys / 2, 4, 6, 8</td><td>Move (South, West, East, North)</td></tr>
+    <tr><td>Enter</td><td>Confirm / Continue</td></tr>
+    <tr><td>ESC (from intro menu)</td><td>Quit to Ndless</td></tr>
+    <tr><td>ON + ESC</td><td>Force quit (from anywhere)</td></tr>
+</table>
+
+<h3>Game Commands</h3>
+<table>
+    <tr><th>Key</th><th>Command</th></tr>
+    <tr><td>a</td><td>Attack</td></tr>
+    <tr><td>b</td><td>Board (mount horse / board ship)</td></tr>
+    <tr><td>c</td><td>Cast Spell</td></tr>
+    <tr><td>d</td><td>Descend (in dungeons)</td></tr>
+    <tr><td>e</td><td>Enter (town, castle, dungeon)</td></tr>
+    <tr><td>f</td><td>Fire Cannons (from ship)</td></tr>
+    <tr><td>g</td><td>Get Chest</td></tr>
+    <tr><td>h</td><td>Hole up &amp; Camp</td></tr>
+    <tr><td>i</td><td>Ignite Torch (in dungeons)</td></tr>
+    <tr><td>j</td><td>Jimmy Lock</td></tr>
+    <tr><td>k</td><td>Klimb (ladders)</td></tr>
+    <tr><td>l</td><td>Locate Position</td></tr>
+    <tr><td>m</td><td>Mix Reagents</td></tr>
+    <tr><td>n</td><td>New Order (party)</td></tr>
+    <tr><td>o</td><td>Open Door</td></tr>
+    <tr><td>p</td><td>Peer at Gem</td></tr>
+    <tr><td>q</td><td>Quit &amp; Save</td></tr>
+    <tr><td>r</td><td>Ready Weapon</td></tr>
+    <tr><td>s</td><td>Search</td></tr>
+    <tr><td>t</td><td>Talk</td></tr>
+    <tr><td>u</td><td>Use Item</td></tr>
+    <tr><td>w</td><td>Wear Armour</td></tr>
+    <tr><td>x</td><td>eXit (vehicle)</td></tr>
+    <tr><td>y</td><td>Yell</td></tr>
+    <tr><td>z</td><td>Ztats (statistics)</td></tr>
+    <tr><td>Space</td><td>Pass Turn</td></tr>
+</table>
+
+<h3>Special Keys (Shift = Alt)</h3>
+<p>The calculator has no Alt key. Use <strong>Shift</strong> instead:</p>
+<table>
+    <tr><th>Key</th><th>Action</th></tr>
+    <tr><td>Shift + H</td><td>Help (key reference)</td></tr>
+    <tr><td>Shift + Q</td><td>Quit to Main Menu</td></tr>
+    <tr><td>Shift + V</td><td>Show Version</td></tr>
+    <tr><td>Shift + X</td><td>Quit Game</td></tr>
+</table>
+
+<div class="note">
+<strong>Note:</strong> Sound and music are not available on the TI-Nspire.
+The volume-related keys (v, comma, period, &lt;, &gt;) are disabled.
+</div>
+
+<h2>Save Files</h2>
+<p>The game creates the following save files in the <code>ultima4/</code> directory:</p>
+<ul>
+    <li><code>party.sav.tns</code> &mdash; Party data and game state</li>
+    <li><code>monsters.sav.tns</code> &mdash; Monster positions</li>
+    <li><code>outmonst.sav.tns</code> &mdash; Overworld monster positions</li>
+    <li><code>dngmap.sav.tns</code> &mdash; Dungeon map data</li>
+</ul>
+
+<h2>Open Source Credits</h2>
+
+<p>This port is based on the following open source projects:</p>
+
+<table>
+    <tr><th>Project</th><th>Description</th><th>License</th></tr>
+    <tr>
+        <td><a href="https://github.com/0ldsk00l/zu4">zu4 (Zesty Ultima IV)</a></td>
+        <td>C/C++ Ultima IV engine<br>Commit: <code>2a8716f</code> (2024-03-17)</td>
+        <td>GPL-2.0</td>
+    </tr>
+    <tr>
+        <td><a href="https://ndless.me/">Ndless SDK</a></td>
+        <td>TI-Nspire development toolkit</td>
+        <td>MPL-1.1 / LGPL</td>
+    </tr>
+    <tr>
+        <td><a href="https://hackage.haskell.org/package/yxml">yxml</a></td>
+        <td>Lightweight SAX XML parser (replaces libxml2)</td>
+        <td>MIT</td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/richgel999/miniz">miniz</a></td>
+        <td>ZIP/zlib decompression (bundled in zu4)</td>
+        <td>MIT</td>
+    </tr>
+    <tr>
+        <td>nSDL</td>
+        <td>SDL 1.2 port for TI-Nspire</td>
+        <td>LGPL</td>
+    </tr>
+</table>
+
+<h2>Port Source Code</h2>
+
+<p>The source code for this TI-Nspire port is available at:<br>
+<a href="https://github.com/ztar-dubs/zu4-ndless.git">https://github.com/ztar-dubs/zu4-ndless.git</a></p>
+
+<h2>Troubleshooting</h2>
+<ul>
+    <li><strong>"Memory allocation failed"</strong> &mdash; Reboot the calculator and try again. RAM may be fragmented after multiple app launches.</li>
+    <li><strong>Missing images / blank screen</strong> &mdash; Verify that all files are present with their <code>.tns</code> extension and the directory structure is correct.</li>
+    <li><strong>Game won't start</strong> &mdash; Make sure Ndless is properly installed and the calculator has a color screen (CX or CX CAS).</li>
+</ul>
+
+</body>
+</html>
