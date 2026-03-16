@@ -12,8 +12,6 @@ A port of **Ultima IV: Quest of the Avatar** to the **TI-Nspire CX CAS** calcula
 ## Building
 
 ```bash
-# Ensure Ndless SDK tools are in PATH
-export PATH="/ndless-sdk/bin:/ndless-sdk/toolchain/install/bin:$PATH"
 
 # Build
 make clean
@@ -84,14 +82,14 @@ zu4-ndless/
 
 This port replaces several components of zu4 to work within the constraints of the TI-Nspire:
 
-| Original (zu4)  | Replacement (nspire/)        | Why                                      |
-|------------------|------------------------------|------------------------------------------|
-| SDL2             | SDL1 (nSDL)                  | nSDL is the only SDL available on Nspire  |
-| OpenGL renderer  | Software RGBA32→RGB565 blit  | No GPU on Nspire                          |
-| libxml2          | yxml SAX parser + DOM shim   | libxml2 too large for calculator          |
-| SDL audio        | Audio stubs (no-ops)         | No audio hardware                         |
-| SDL threads      | Polling timers (SDL_GetTicks) | nSDL has no thread support               |
-| Standard fopen   | Linker --wrap=fopen          | All Nspire files require .tns extension   |
+| Original (zu4)  | Replacement (nspire/)         | Why                                      |
+| --------------- | ----------------------------- | ---------------------------------------- |
+| SDL2            | SDL1 (nSDL)                   | nSDL is the only SDL available on Nspire |
+| OpenGL renderer | Software RGBA32→RGB565 blit   | No GPU on Nspire                         |
+| libxml2         | yxml SAX parser + DOM shim    | libxml2 too large for calculator         |
+| SDL audio       | Audio stubs (no-ops)          | No audio hardware                        |
+| SDL threads     | Polling timers (SDL_GetTicks) | nSDL has no thread support               |
+| Standard fopen  | Linker --wrap=fopen           | All Nspire files require .tns extension  |
 
 ### Key design decisions
 
@@ -105,22 +103,22 @@ This port replaces several components of zu4 to work within the constraints of t
 
 The following zu4 source files have been modified for the Nspire port (all changes are guarded by `#ifdef NSPIRE`):
 
-| File              | Changes                                                    |
-|-------------------|------------------------------------------------------------|
-| `error.c`         | `zu4_assert` non-fatal (no `abort()`)                     |
-| `event.h`         | Polling timer fields (`lastTick`, `running`, `poll()`)     |
-| `game.cpp`        | Shift labels in help, sound keys disabled, ESC quit        |
-| `intro.cpp`       | `bSkipTitles=true`, ESC as quit key from menu              |
-| `image.c`         | Null pointer protection in get/set_pixel, fill             |
-| `imageview.cpp`   | Null image checks, silent return on NSPIRE                 |
-| `screen.cpp`      | Null charsetInfo protection, tileanimSets cleanup          |
-| `textview.cpp`    | Range-check clamp instead of assert                        |
-| `tileview.cpp`    | Range-check clamp instead of assert                        |
-| `u4file.c`        | `zippath`/`dospath` point to `data/` on NSPIRE             |
-| `utils.h`         | `long&` AdjustValue overloads for ARM `int32_t`            |
-| `config.cpp/.h`   | Added `destroy()` for clean memory release                 |
-| `creature.cpp/.h` | Added `destroy()` + destructor for clean memory release    |
-| `imagemgr.cpp/.h` | `screenInfo` tracked as member for proper cleanup          |
+| File              | Changes                                                 |
+| ----------------- | ------------------------------------------------------- |
+| `error.c`         | `zu4_assert` non-fatal (no `abort()`)                   |
+| `event.h`         | Polling timer fields (`lastTick`, `running`, `poll()`)  |
+| `game.cpp`        | Shift labels in help, sound keys disabled, ESC quit     |
+| `intro.cpp`       | `bSkipTitles=true`, ESC as quit key from menu           |
+| `image.c`         | Null pointer protection in get/set_pixel, fill          |
+| `imageview.cpp`   | Null image checks, silent return on NSPIRE              |
+| `screen.cpp`      | Null charsetInfo protection, tileanimSets cleanup       |
+| `textview.cpp`    | Range-check clamp instead of assert                     |
+| `tileview.cpp`    | Range-check clamp instead of assert                     |
+| `u4file.c`        | `zippath`/`dospath` point to `data/` on NSPIRE          |
+| `utils.h`         | `long&` AdjustValue overloads for ARM `int32_t`         |
+| `config.cpp/.h`   | Added `destroy()` for clean memory release              |
+| `creature.cpp/.h` | Added `destroy()` + destructor for clean memory release |
+| `imagemgr.cpp/.h` | `screenInfo` tracked as member for proper cleanup       |
 
 ## Installation on Calculator
 
