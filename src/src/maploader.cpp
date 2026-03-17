@@ -59,6 +59,21 @@ MapLoader *MapLoader::registerLoader(MapLoader *loader, Map::Type type) {
     return loader;
 }
 
+void MapLoader::cleanup() {
+    if (loaderMap != NULL) {
+        /* Collect unique loaders (some are registered for multiple types) */
+        std::map<MapLoader *, bool> seen;
+        for (std::map<Map::Type, MapLoader *>::iterator i = loaderMap->begin(); i != loaderMap->end(); i++) {
+            if (seen.find(i->second) == seen.end()) {
+                seen[i->second] = true;
+                delete i->second;
+            }
+        }
+        delete loaderMap;
+        loaderMap = NULL;
+    }
+}
+
 /**
  * Loads raw data from the given file.
  */

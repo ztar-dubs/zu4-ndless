@@ -24,6 +24,7 @@ public:
     virtual ~DialogueLoader() {}
 
     static DialogueLoader *getLoader(const std::string &mimeType);
+    static void cleanup();
     virtual Dialogue *load(void *source) = 0;
 
 protected:

@@ -19,10 +19,15 @@
 #include "u4.h"
 #include "config.h"
 #include "creature.h"
+#include "dialogueloader.h"
+#include "dungeonview.h"
 #include "error.h"
+#include "event.h"
 #include "game.h"
 #include "image.h"
 #include "intro.h"
+#include "maploader.h"
+#include "mapmgr.h"
 #include "music.h"
 #include "person.h"
 #include "progress_bar.h"
@@ -124,10 +129,15 @@ int main(int argc, char *argv[]) {
     if (quit) {
         delete intro;
         intro = NULL;
+        DungeonView::destroy();
         Tileset::unloadAll();
+        MapMgr::destroy();
         CreatureMgr::destroy();
+        DialogueLoader::cleanup();
+        MapLoader::cleanup();
         zu4_snd_deinit();
         zu4_music_deinit();
+        EventHandler::destroy();
         screenDelete();
         Config::destroy();
         return 0;
@@ -148,11 +158,16 @@ int main(int argc, char *argv[]) {
     delete intro;
     intro = NULL;
 
+    DungeonView::destroy();
     Tileset::unloadAll();
+    MapMgr::destroy();
     CreatureMgr::destroy();
+    DialogueLoader::cleanup();
+    MapLoader::cleanup();
 
     zu4_snd_deinit();
     zu4_music_deinit();
+    EventHandler::destroy();
     screenDelete();
     Config::destroy();
 

@@ -23,6 +23,14 @@ DungeonView * DungeonView::getInstance()
 	return instance;
 }
 
+void DungeonView::destroy()
+{
+	if (instance) {
+		delete instance;
+		instance = NULL;
+	}
+}
+
 void DungeonView::display(Context * c, TileView *view)
 {
 	int x,y;

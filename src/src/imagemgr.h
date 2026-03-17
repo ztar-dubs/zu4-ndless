@@ -124,6 +124,7 @@ private:
 
     void fixupIntro(Image *im);
     void fixupAbyssVision(Image *im);
+    static void cleanupAbyssVision();
     void fixupDungNS(Image *im);
 
     void update(SettingsData *newSettings);

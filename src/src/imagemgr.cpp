@@ -54,6 +54,7 @@ ImageMgr::~ImageMgr() {
     /* screenInfo is skipped by ImageSet::~ImageSet, delete it here */
     delete screenInfo;
     screenInfo = NULL;
+    cleanupAbyssVision();
 }
 
 void ImageMgr::init() {
@@ -280,8 +281,15 @@ void ImageMgr::fixupIntro(Image *im) {
 	}
 }
 
+static unsigned int *abyssVisionData = NULL;
+
+void ImageMgr::cleanupAbyssVision() {
+    delete[] abyssVisionData;
+    abyssVisionData = NULL;
+}
+
 void ImageMgr::fixupAbyssVision(Image *im) {
-    static unsigned int *data = NULL;
+    unsigned int *&data = abyssVisionData;
 
     /*
      * Each VGA vision components must be XORed with all the previous

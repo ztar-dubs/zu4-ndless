@@ -21,3 +21,12 @@ DialogueLoader *DialogueLoader::registerLoader(DialogueLoader *loader, const std
     (*loaderMap)[mimeType] = loader;
     return loader;
 }
+
+void DialogueLoader::cleanup() {
+    if (loaderMap != NULL) {
+        for (std::map<std::string, DialogueLoader *>::iterator i = loaderMap->begin(); i != loaderMap->end(); i++)
+            delete i->second;
+        delete loaderMap;
+        loaderMap = NULL;
+    }
+}

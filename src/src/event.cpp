@@ -26,6 +26,13 @@ EventHandler *EventHandler::getInstance() {
     return instance;
 }
 
+void EventHandler::destroy() {
+    if (instance != NULL) {
+        delete instance;
+        instance = NULL;
+    }
+}
+
 /**
  * Waits a given number of milliseconds before continuing
  */

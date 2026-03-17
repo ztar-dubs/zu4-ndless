@@ -31,6 +31,7 @@ public:
     virtual ~MapLoader() {}
 
     static MapLoader *getLoader(Map::Type type);
+    static void cleanup();
 
     virtual bool load(Map *map) = 0;
 

@@ -37,6 +37,7 @@ private:
 public:
     static DungeonView * instance;
     static DungeonView * getInstance();
+    static void destroy();
 
     void drawInDungeon(Tile *tile, int x_offset, int distance, Direction orientation, bool tiled);
     int graphicIndex(int xoffset, int distance, Direction orientation, DungeonGraphicType type);

@@ -278,6 +278,7 @@ public:
 
     /* Static functions */
     static EventHandler *getInstance();
+    static void destroy();
     static void sleep(unsigned int usec);
     static void wait_msecs(unsigned int msecs);
     static void wait_cycles(unsigned int cycles);
